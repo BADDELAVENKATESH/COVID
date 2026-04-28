@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>COVID Prediction Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card */
+.container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+/* Heading */
+h1 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.subtitle {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 14px;
+    color: #555;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #4facfe;
+    box-shadow: 0 0 5px rgba(79,172,254,0.5);
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #4facfe;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #007bff;
+}
+
+/* Result */
+.result-box {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f4f8ff;
+    border-radius: 10px;
+}
+
+.result-box h2 {
+    color: #007bff;
+    font-size: 26px;
+}
+
+/* Back button */
+a {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    background: #333;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+a:hover {
+    background: black;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+        
+        <h1>COVID-19 Predictor</h1>
+        <p class="subtitle">Enter values to predict recovery</p>
+
+        <form action="/predict" method="post">
+            
+            <div class="input-group">
+                <label>Confirmed Cases</label>
+                <input type="number" name="confirmed" required>
+            </div>
+
+            <div class="input-group">
+                <label>Deaths</label>
+                <input type="number" name="deaths" required>
+            </div>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <!-- Result (Flask will inject value here) -->
+        {% if prediction %}
+        <div class="result-box">
+            <p>Estimated Recovered Cases</p>
+            <h2>{{ prediction }}</h2>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+</body>
+</html>
